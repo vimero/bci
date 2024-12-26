@@ -1,6 +1,8 @@
 package cl.bci.user.application.usecase;
 
 
+import cl.bci.user.application.model.UserRequest;
+import cl.bci.user.application.model.UserResponse;
 import cl.bci.user.application.port.PersistenceUserPort;
 import lombok.AllArgsConstructor;
 
@@ -8,5 +10,10 @@ import lombok.AllArgsConstructor;
 public class CreateUserUseCase {
 
     private final PersistenceUserPort persistenceProductPort;
+
+    public UserResponse create(UserRequest request){
+        persistenceProductPort.save(request);
+        return new UserResponse();
+    }
 
 }
