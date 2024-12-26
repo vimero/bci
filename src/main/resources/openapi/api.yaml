@@ -1,0 +1,99 @@
+openapi: 3.0.3
+info:
+  title: API de Usuario
+  description: API para gestionar usuarios con información de contacto.
+  version: 1.0.0
+
+paths:
+  /usuarios:
+    post:
+      summary: Crear un nuevo usuario
+      description: Permite crear un usuario con información básica y sus teléfonos.
+      operationId: crearUsuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  $ref: '#/components/schemas/UserRequest'
+      responses:
+        '201':
+          description: Usuario creado exitosamente.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '400':
+          description: Solicitud inválida.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    UserRequest:
+      type: object
+      description: Objeto que contiene la información del usuario.
+      properties:
+        name:
+          type: string
+          description: Nombre completo del usuario.
+          example: "Juan Rodriguez"
+        email:
+          type: string
+          description: Correo electrónico del usuario.
+          format: email
+          example: "juan@rodriguez.org"
+        password:
+          type: string
+          description: Contraseña del usuario.
+          format: password
+          example: "hunter2"
+        phones:
+          type: array
+          description: Lista de teléfonos asociados al usuario.
+          items:
+            type: object
+            properties:
+              number:
+                type: string
+                description: Número de teléfono.
+                example: "1234567"
+              citycode:
+                type: string
+                description: Código de la ciudad.
+                example: "1"
+              contrycode:
+                type: string
+                description: Código del país.
+                example: "57"
+      required:
+        - name
+        - email
+        - password
+        - phones
+    UserResponse:
+      type: object
+      description: Respuesta con la información del usuario creado.
+      properties:
+        id:
+          type: string
+          description: ID único del usuario creado.
+          example: "abc123"
+        created_at:
+          type: string
+          description: Fecha de creación del usuario.
+          format: date-time
+          example: "2024-12-26T12:34:56Z"
+    ErrorResponse:
+      type: object
+      description: Respuesta de error.
+      properties:
+        error:
+          type: string
+          description: Descripción del error.
+          example: "El campo 'email' es obligatorio."
