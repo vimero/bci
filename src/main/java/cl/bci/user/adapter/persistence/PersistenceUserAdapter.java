@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -29,15 +30,19 @@ public class PersistenceUserAdapter implements PersistenceUserPort {
 
     @Override
     public UserResponse save(UserRequest request) throws BusinessException {
-        UserEntity entity = userMapper.toEntity(request);
-        entity.setId(UUID.randomUUID());
-        entity.setCreated(new Date());
-        entity.setIsActive(true);
-        entity.setToken(generateToken(entity.getEmail()));
-        entity = userRepository.save(entity);
+        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
+            throw new BusinessException("Email already exists");
+        } else {
+            UserEntity entity = userMapper.toEntity(request);
+            entity.setId(UUID.randomUUID());
+            entity.setCreated(new Date());
+            entity.setIsActive(true);
+            entity.setToken(generateToken(entity.getEmail()));
+            entity = userRepository.save(entity);
+            UserResponse response = userMapper.toUserResponse(entity);
+            return response;
+        }
 
-        UserResponse response = userMapper.toUserResponse(entity);
-        return response;
     }
 
     public String generateToken(String subject) {
