@@ -144,7 +144,7 @@
                             <configOptions>
                                 <useJakartaEe>true</useJakartaEe>
                                 <useSpringBoot3>true</useSpringBoot3>
-                                <controllerThrowsExceptions>java.io.IOException</controllerThrowsExceptions>
+                                <controllerThrowsExceptions>cl.bci.user.application.exception.BusinessException</controllerThrowsExceptions>
                                 <interfaceOnly>true</interfaceOnly>
                                 <skipDefaultInterface>true</skipDefaultInterface>
                                 <useBeanValidation>true</useBeanValidation>
@@ -158,6 +158,7 @@
                                 <useBeanValidation>true</useBeanValidation>
                                 <apiPackage>cl.bci.user.application.api</apiPackage>
                                 <modelPackage>cl.bci.user.application.model</modelPackage>
+                                <supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
                             </configOptions>
                             <typeMappings>
                                 <typeMapping>OffsetDateTime=LocalDateTime</typeMapping>
