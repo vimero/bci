@@ -84,11 +84,29 @@ components:
           type: string
           description: ID único del usuario creado.
           example: "abc123"
-        created_at:
+        created:
           type: string
           description: Fecha de creación del usuario.
           format: date-time
           example: "2024-12-26T12:34:56Z"
+        modified:
+          type: string
+          description: Fecha de la última actualización del usuario.
+          format: date-time
+          example: "2024-12-26T12:34:56Z"
+        last_login:
+          type: string
+          description: Fecha del último ingreso. Coincide con la fecha de creación si el usuario es nuevo.
+          format: date-time
+          example: "2024-12-26T12:34:56Z"
+        token:
+          type: string
+          description: Token de acceso de la API.
+          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+        is_active:
+          type: boolean
+          description: Indica si el usuario sigue habilitado dentro del sistema.
+          example: true
     ErrorResponse:
       type: object
       description: Respuesta de error.

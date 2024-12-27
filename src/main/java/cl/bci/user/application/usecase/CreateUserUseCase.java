@@ -12,8 +12,7 @@ public class CreateUserUseCase {
     private final PersistenceUserPort persistenceProductPort;
 
     public UserResponse create(UserRequest request){
-        persistenceProductPort.save(request);
-        return new UserResponse();
+        return persistenceProductPort.save(request);
     }
 
 }

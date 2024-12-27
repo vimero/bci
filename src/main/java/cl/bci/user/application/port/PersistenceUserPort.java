@@ -1,8 +1,10 @@
 package cl.bci.user.application.port;
 
 import cl.bci.user.application.model.UserRequest;
+import cl.bci.user.application.model.UserResponse;
 
 public interface PersistenceUserPort {
 
-    void save(UserRequest request);
+    UserResponse save(UserRequest request);
+
 }
